@@ -1,7 +1,9 @@
 ## Vore
 
 ### important files and their functions / önemli dosyalar ve işlevleri
-[License](License.md)
+[LICENSE](LICENSE): Vore license file / Vore lisans Dosyası<br>
+[console.py][console.py] Main code / Ana kod(Ana Dosya)<br>
+
 ### Türkçe
 Vore yazılımcılar için geliştirilmiş bir konsoldur içersinde daha kolay yazılım geliştirmeyi sağlamak için
 araçlar bulunur.<br>
