@@ -1,11 +1,27 @@
+"""
+        Vore MIT © 2021 Zoda
+
+Linkler / Links
+Github: https://github.com/kerem3338/vore
+License / Lisans: https://github.com/kerem3338/vore/blob/main/LICENSE
+
+Türkçe
+Vore yazılımcılar için geliştirilmiş bir konsoldur içersinde daha kolay yazılım geliştirmeyi sağlamak için
+araçlar bulunur.
+
+English
+To enable easier software development in a console developed for Vore developers.
+tools are available.
+"""
 import os
 import sys
 import re
 
+
 class Com:
     def __init__(self, command):
         self.command = command
-        self.version = "1.0"
+        self.version = "1.1"
         self.ch_list = ["\"", "'", "::"]
         self.command_list = {
             "test": self.test,
@@ -14,6 +30,8 @@ class Com:
             "version": self.ver,
             "exc-file": self.fileexecuter,
             "exit": sys.exit,
+            "cominfo": self.cominfo,
+            "clear": self.clear
         }
         self.execute()
     
@@ -34,13 +52,32 @@ class Com:
             except IndexError:
                 pass
     def fileexecuter(self):
+        """Yakında"""
         print("Yakında...")
 
+    def cominfo(self):
+        """Gets command info"""
+        if self.command.split()[1] in self.command_list:
+            com=f"print(self.command_list[self.command.split()[1]].__doc__)"
+            eval(com)
+        else:
+            print("Error: Command not found!")
+
+    def clear(self):
+        """clear screen"""
+        if os.name == "nt":
+            os.system("cls")
+        else:
+            os.system("cls")
+
     def echo(self):
-        #tırnak içindeki yazıları alır
-        print(re.findall('"([^"]*)"', self.command.split()[1]))
+        try:
+            print(re.findall('"([^"]*)"', self.command)[0])
+        except IndexError:
+            print("String Error: quotes not closed")
 
     def ver(self):
+        """return vore version"""
         print(self.version)
 
     def restart(self):
@@ -48,7 +85,8 @@ class Com:
         sys.exit()
 
     def test(self):
-        print("Merhaba Vore")
+        print("Merhaba Vore!")
+
 print("Vore Shell")
 history_list=[]
 while True:
@@ -63,4 +101,6 @@ while True:
         else:
             Com(command)
     except KeyboardInterrupt:
+        sys.exit()
+    except EOFError:
         sys.exit()
